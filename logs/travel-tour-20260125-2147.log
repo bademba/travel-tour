@@ -1,0 +1,36 @@
+2026-01-25T21:47:39.256+03:00  INFO 20164 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Starting TravelTourApplication using Java 17.0.16 with PID 20164 (/home/ba/IdeaProjects/travel-tour/target/classes started by ba in /home/ba/IdeaProjects/travel-tour)
+2026-01-25T21:47:39.277+03:00  INFO 20164 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-01-25T21:47:39.815+03:00  INFO 20164 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-25T21:47:39.832+03:00  INFO 20164 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
+2026-01-25T21:47:40.192+03:00  INFO 20164 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9192 (http)
+2026-01-25T21:47:40.202+03:00  INFO 20164 --- [travel-tour] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-25T21:47:40.202+03:00  INFO 20164 --- [travel-tour] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-01-25T21:47:40.247+03:00  INFO 20164 --- [travel-tour] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 903 ms
+2026-01-25T21:47:40.354+03:00  INFO 20164 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-25T21:47:40.619+03:00  INFO 20164 --- [travel-tour] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e02721d
+2026-01-25T21:47:40.621+03:00  INFO 20164 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-25T21:47:40.644+03:00  INFO 20164 --- [travel-tour] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-25T21:47:40.680+03:00  INFO 20164 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-01-25T21:47:41.030+03:00  INFO 20164 --- [travel-tour] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-25T21:47:41.119+03:00  INFO 20164 --- [travel-tour] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/kendirita]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: kendirita/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-25T21:47:41.408+03:00  INFO 20164 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-25T21:47:41.414+03:00  INFO 20164 --- [travel-tour] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-25T21:47:41.464+03:00  WARN 20164 --- [travel-tour] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-25T21:47:41.764+03:00  INFO 20164 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9192 (http) with context path '/'
+2026-01-25T21:47:41.770+03:00  INFO 20164 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Started TravelTourApplication in 3.02 seconds (process running for 3.439)
+2026-01-25T21:55:21.725+03:00  INFO 20164 --- [travel-tour] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-25T21:55:21.730+03:00  INFO 20164 --- [travel-tour] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-01-25T21:55:21.733+03:00  INFO 20164 --- [travel-tour] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-25T21:55:21.735+03:00  INFO 20164 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-25T21:55:21.741+03:00  INFO 20164 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

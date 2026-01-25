@@ -1,0 +1,92 @@
+2026-01-26T00:00:33.937+03:00  INFO 57377 --- [travel-tour] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-26T00:00:33.949+03:00  INFO 57377 --- [travel-tour] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-01-26T00:00:33.952+03:00  INFO 57377 --- [travel-tour] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-26T00:00:33.955+03:00  INFO 57377 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-26T00:00:33.963+03:00  INFO 57377 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-26T00:00:36.815+03:00  INFO 59096 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Starting TravelTourApplication using Java 17.0.16 with PID 59096 (/home/ba/IdeaProjects/travel-tour/target/classes started by ba in /home/ba/IdeaProjects/travel-tour)
+2026-01-26T00:00:36.818+03:00  INFO 59096 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-01-26T00:00:37.360+03:00  INFO 59096 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-26T00:00:37.401+03:00  INFO 59096 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interface.
+2026-01-26T00:00:37.756+03:00  INFO 59096 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9192 (http)
+2026-01-26T00:00:37.767+03:00  INFO 59096 --- [travel-tour] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-26T00:00:37.767+03:00  INFO 59096 --- [travel-tour] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-01-26T00:00:37.801+03:00  INFO 59096 --- [travel-tour] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 924 ms
+2026-01-26T00:00:37.905+03:00  INFO 59096 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-26T00:00:38.189+03:00  INFO 59096 --- [travel-tour] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b7c58e7
+2026-01-26T00:00:38.190+03:00  INFO 59096 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-26T00:00:38.213+03:00  INFO 59096 --- [travel-tour] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-26T00:00:38.263+03:00  INFO 59096 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-01-26T00:00:38.651+03:00  INFO 59096 --- [travel-tour] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-26T00:00:38.749+03:00  INFO 59096 --- [travel-tour] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/kendirita]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: kendirita/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-26T00:00:39.390+03:00  INFO 59096 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-26T00:00:39.396+03:00  INFO 59096 --- [travel-tour] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-26T00:00:39.477+03:00  INFO 59096 --- [travel-tour] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-26T00:00:39.646+03:00  WARN 59096 --- [travel-tour] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-26T00:00:39.902+03:00  INFO 59096 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9192 (http) with context path '/'
+2026-01-26T00:00:39.907+03:00  INFO 59096 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Started TravelTourApplication in 3.548 seconds (process running for 3.911)
+2026-01-26T00:00:49.224+03:00  INFO 59096 --- [travel-tour] [http-nio-9192-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-26T00:00:49.225+03:00  INFO 59096 --- [travel-tour] [http-nio-9192-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-01-26T00:00:49.226+03:00  INFO 59096 --- [travel-tour] [http-nio-9192-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-01-26T00:00:49.730+03:00  INFO 59096 --- [travel-tour] [http-nio-9192-exec-2] c.k.travel_tour.logging.LoggingFilter    : REQUEST::|logId=aa964d4d-c1ac-4d00-a9aa-b16488d71ed7|Method=POST| RequestURI=/v1/tour/user|User-Agent=PostmanRuntime/7.49.1| OS=UnKnown, More-Info: PostmanRuntime/7.49.1| RequestBody={
+    "email":"jdoe@mail.com",
+    "fullName":"John Doe"
+}| ResponseCode=409| ResponseBody={"data":null,"message":"User already exists","responseId":"aa964d4d-c1ac-4d00-a9aa-b16488d71ed7","status":409,"timestamp":"26-01-2026 00:00:39"}| TimeTaken(ms)=485|SourceIP=0:0:0:0:0:0:0:1 |RemotePort=49328 |ServerName=localhost|RemoteHost=0:0:0:0:0:0:0:1
+2026-01-26T00:01:17.450+03:00  INFO 59096 --- [travel-tour] [http-nio-9192-exec-3] c.k.travel_tour.logging.LoggingFilter    : REQUEST::|logId=ef7c5d09-24ee-4a94-b1c1-500cccf6155f|Method=POST| RequestURI=/v1/tour/user|User-Agent=PostmanRuntime/7.49.1| OS=UnKnown, More-Info: PostmanRuntime/7.49.1| RequestBody={
+    "email":"jdoe@mail.com",
+    "fullName":"John Doe"
+}| ResponseCode=201| ResponseBody={"data":{"createdAt":"2026-01-25 21:01:17","email":"jdoe@mail.com","fullName":"John Doe","id":"86cb9161-0317-4ddd-bde0-c4e1c4673e4a","updatedAt":"2026-01-25 21:01:17"},"message":"User created","responseId":"ef7c5d09-24ee-4a94-b1c1-500cccf6155f","status":201,"timestamp":"26-01-2026 00:00:39"}| TimeTaken(ms)=83|SourceIP=0:0:0:0:0:0:0:1 |RemotePort=49328 |ServerName=localhost|RemoteHost=0:0:0:0:0:0:0:1
+2026-01-26T00:01:58.731+03:00  INFO 59096 --- [travel-tour] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-26T00:01:58.738+03:00  INFO 59096 --- [travel-tour] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-01-26T00:01:58.742+03:00  INFO 59096 --- [travel-tour] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-26T00:01:58.744+03:00  INFO 59096 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-26T00:01:58.754+03:00  INFO 59096 --- [travel-tour] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-26T00:02:01.357+03:00  INFO 59593 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Starting TravelTourApplication using Java 17.0.16 with PID 59593 (/home/ba/IdeaProjects/travel-tour/target/classes started by ba in /home/ba/IdeaProjects/travel-tour)
+2026-01-26T00:02:01.360+03:00  INFO 59593 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-01-26T00:02:01.920+03:00  INFO 59593 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-26T00:02:01.961+03:00  INFO 59593 --- [travel-tour] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interface.
+2026-01-26T00:02:02.329+03:00  INFO 59593 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9192 (http)
+2026-01-26T00:02:02.347+03:00  INFO 59593 --- [travel-tour] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-26T00:02:02.347+03:00  INFO 59593 --- [travel-tour] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-01-26T00:02:02.392+03:00  INFO 59593 --- [travel-tour] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 982 ms
+2026-01-26T00:02:02.494+03:00  INFO 59593 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-26T00:02:02.788+03:00  INFO 59593 --- [travel-tour] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b7c58e7
+2026-01-26T00:02:02.789+03:00  INFO 59593 --- [travel-tour] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-26T00:02:02.813+03:00  INFO 59593 --- [travel-tour] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-26T00:02:02.872+03:00  INFO 59593 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-01-26T00:02:03.452+03:00  INFO 59593 --- [travel-tour] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-26T00:02:03.594+03:00  INFO 59593 --- [travel-tour] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/kendirita]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: kendirita/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-26T00:02:04.697+03:00  INFO 59593 --- [travel-tour] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-26T00:02:04.708+03:00  INFO 59593 --- [travel-tour] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-26T00:02:04.843+03:00  INFO 59593 --- [travel-tour] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-26T00:02:05.083+03:00  WARN 59593 --- [travel-tour] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-26T00:02:05.448+03:00  INFO 59593 --- [travel-tour] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9192 (http) with context path '/'
+2026-01-26T00:02:05.457+03:00  INFO 59593 --- [travel-tour] [main] c.k.travel_tour.TravelTourApplication    : Started TravelTourApplication in 4.588 seconds (process running for 4.993)
+2026-01-26T00:02:16.244+03:00  INFO 59593 --- [travel-tour] [http-nio-9192-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-26T00:02:16.244+03:00  INFO 59593 --- [travel-tour] [http-nio-9192-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-01-26T00:02:16.245+03:00  INFO 59593 --- [travel-tour] [http-nio-9192-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-01-26T00:02:16.852+03:00  INFO 59593 --- [travel-tour] [http-nio-9192-exec-1] c.k.travel_tour.logging.LoggingFilter    : REQUEST::|logId=552eaac0-92a6-4d4a-abf3-4f5592bf9753|Method=POST| RequestURI=/v1/tour/user|User-Agent=PostmanRuntime/7.49.1| OS=UnKnown, More-Info: PostmanRuntime/7.49.1| RequestBody={
+    "email":"jdoe@mail.com",
+    "fullName":"John Doe"
+}| ResponseCode=409| ResponseBody={"data":null,"message":"User already exists","responseId":"552eaac0-92a6-4d4a-abf3-4f5592bf9753","status":409,"timestamp":"26-01-2026 00:02:04"}| TimeTaken(ms)=585|SourceIP=0:0:0:0:0:0:0:1 |RemotePort=56216 |ServerName=localhost|RemoteHost=0:0:0:0:0:0:0:1
