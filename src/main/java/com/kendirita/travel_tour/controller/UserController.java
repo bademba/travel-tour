@@ -49,7 +49,7 @@ public class UserController {
     public ResponseEntity<Object> searchBYEmail(@PathVariable String email){
         User userEmail = userService.searchByEmail(email);
         if(userEmail==null){
-            return ResponseHandler.generateResponse(UUID.randomUUID(),"User not found",HttpStatus.NOT_FOUND,"",timestamp);
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"User not found",HttpStatus.NOT_FOUND,null,timestamp);
         }
         return ResponseHandler.generateResponse(UUID.randomUUID(),"User details found",HttpStatus.OK,userEmail,timestamp);
     }
@@ -57,5 +57,28 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<Object> listUsers(){
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Users found",HttpStatus.OK,userService.listUsers(),timestamp);
+    }
+
+    @PutMapping("/users/{email}")
+    public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable String email){
+        User currentUser = userService.searchByEmail(email);
+        if(currentUser==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"User not found",HttpStatus.NOT_FOUND,"",timestamp);
+        }
+        currentUser.setFullName(user.getFullName());
+        User updatedUser =userRepository.save(currentUser);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"User updated",HttpStatus.OK,updatedUser,timestamp);
+    }
+
+    @DeleteMapping("/users/{email}")
+    public ResponseEntity<Object> deleteUserByEmail(@PathVariable String email) {
+
+        boolean deleted = userService.deleteByEmail(email);
+
+        if (!deleted) {
+            return ResponseHandler.generateResponse(UUID.randomUUID(), "User not found", HttpStatus.NOT_FOUND, null, timestamp);
+        }
+
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "User deleted successfully", HttpStatus.OK, null, timestamp);
     }
 }
