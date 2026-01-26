@@ -4,6 +4,7 @@ import com.kendirita.travel_tour.entity.Client;
 import com.kendirita.travel_tour.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -17,5 +18,15 @@ public class ClientService {
             return null;
         }
         return clientRepository.save(client);
+    }
+
+    //search client by email
+    public  Client searchClientByEmail(String email){
+        return clientRepository.searchByEmail(email);
+    }
+
+    //list all clients
+    public List<Client> listClients(){
+        return clientRepository.findAll();
     }
 }

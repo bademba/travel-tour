@@ -1,8 +1,6 @@
 package com.kendirita.travel_tour.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-
 import java.util.Date;
 
 @Entity
@@ -39,8 +37,10 @@ public class Client {
     @Column(name="accessibility_needs")
     public String accessibilityNeeds;
 
-    @Column(name = "preferences")
-    private String preferences;
+//    @Column(name = "preferences")
+//    private String preferences;
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private ClientPreference preferences;
 
     @Column(name = "created_at", updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
@@ -59,12 +59,6 @@ public class Client {
         this.updatedAt = new Date();
     }
 
-//    @PrePersist
-//    public void prePersist() {
-//        if (preferences == null) {
-//            preferences = Map.of();
-//        }
-//    }
 
     @PreUpdate
     protected void onUpdate() {
@@ -151,12 +145,23 @@ public class Client {
         this.accessibilityNeeds = accessibilityNeeds;
     }
 
-    public String getPreferences() {
+//    public String getPreferences() {
+//        return preferences;
+//    }
+//
+//    public void setPreferences(String preferences) {
+//        this.preferences = preferences;
+//    }
+
+    public ClientPreference getPreferences() {
         return preferences;
     }
 
-    public void setPreferences(String preferences) {
+    public void setPreferences(ClientPreference preferences) {
         this.preferences = preferences;
+        if (preferences != null) {
+            preferences.setClient(this);
+        }
     }
 
     public Date getCreatedAt() {
