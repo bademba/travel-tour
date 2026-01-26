@@ -1,13 +1,10 @@
 package com.kendirita.travel_tour.repository;
 
-import com.kendirita.travel_tour.entity.User;
+import com.kendirita.travel_tour.entity.Suppliers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,String> {
-
+public interface SupplierRepository  extends JpaRepository<Suppliers,String> {
     boolean existsByEmail(String email);
-    User searchByEmail(String email);
-    void deleteByEmail(String email);
 }

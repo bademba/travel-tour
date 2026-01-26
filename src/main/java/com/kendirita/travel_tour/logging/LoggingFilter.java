@@ -2,6 +2,7 @@ package com.kendirita.travel_tour.logging;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 //import com.fasterxml.jackson.databind.JsonNode;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -27,43 +28,63 @@ public class LoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
         ContentCachingRequestWrapper requestWrapper =
                 new ContentCachingRequestWrapper(request, 1024 * 1024);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+
+        // 1️⃣ Generate a requestId for logging
+        String logId = UUID.randomUUID().toString();
 
         long startTime = System.currentTimeMillis();
         filterChain.doFilter(requestWrapper, responseWrapper);
         long timeTaken = System.currentTimeMillis() - startTime;
 
         String requestBody = getStringValue(requestWrapper.getContentAsByteArray(), request.getCharacterEncoding());
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            if(requestBody != null && !requestBody.isBlank()) {
+                JsonNode jsonNode = mapper.readTree(requestBody);
+                requestBody = mapper.writeValueAsString(jsonNode); // compact single-line
+            }
+        } catch (Exception e) {
+            }
+
         String responseBody = getStringValue(responseWrapper.getContentAsByteArray(), response.getCharacterEncoding());
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            if(responseBody != null && !responseBody.isBlank()) {
+                JsonNode jsonNode = mapper.readTree(responseBody);
+                responseBody = mapper.writeValueAsString(jsonNode);
+            }
+        } catch (Exception e) {
+            }
 
-        //retrieving responseId from the response and assigning it to log id
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(responseBody);
-        String responseId=jsonNode.get("responseId").asText();
-
-        //Get OS details
-        String browserDetails =request.getHeader("User-Agent");
-        final String lowerCaseBrowser =browserDetails.toLowerCase();
+        // 3️⃣ OS detection (keep your existing code)
+        String browserDetails = request.getHeader("User-Agent");
+        final String lowerCaseBrowser = browserDetails.toLowerCase();
         if (lowerCaseBrowser.contains("windows")) {
-            browserDetails="windows";
+            browserDetails = "Windows";
         } else if (lowerCaseBrowser.contains("mac")) {
-            browserDetails="Mac";
+            browserDetails = "Mac";
         } else if (lowerCaseBrowser.contains("x11")) {
-            browserDetails= "Unix";
+            browserDetails = "Unix";
         } else if (lowerCaseBrowser.contains("android")) {
-            browserDetails= "Android";
+            browserDetails = "Android";
         } else if (lowerCaseBrowser.contains("iphone")) {
-            browserDetails= "IPhone";
+            browserDetails = "IPhone";
         } else {
-            browserDetails= "UnKnown, More-Info: " + browserDetails;
+            browserDetails = "Unknown, More-Info: " + browserDetails;
         }
-        //end of OS details
 
+        // 4️⃣ Logging
         LOGGER.info(
-                "REQUEST::"+"|logId="+responseId+"|Method="+ request.getMethod()+"| RequestURI=" +request.getRequestURI()+"|User-Agent="+request.getHeader("User-Agent")+"| OS="+browserDetails+"| RequestBody="+requestBody+"| ResponseCode="+ response.getStatus()+"| ResponseBody="+ responseBody
-                        +"| TimeTaken(ms)="+timeTaken+"|SourceIP="+request.getRemoteAddr()+ " |RemotePort="+request.getRemotePort()+" |ServerName=" +request.getServerName() +"|RemoteHost="+request.getRemoteHost() );
+                "REQUEST::|logId={} |Method={} |RequestURI={} |User-Agent={} |OS={} |RequestBody={} |ResponseCode={} |ResponseBody={} |TimeTaken(ms)={} |SourceIP={} |RemotePort={} |ServerName={} |RemoteHost={}",
+                logId, request.getMethod(), request.getRequestURI(), request.getHeader("User-Agent"),
+                browserDetails, requestBody, response.getStatus(), responseBody, timeTaken,
+                request.getRemoteAddr(), request.getRemotePort(), request.getServerName(), request.getRemoteHost()
+        );
 
         responseWrapper.copyBodyToResponse();
     }
