@@ -10,10 +10,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    //Create a new user
     public User createUser(User user){
         if(userRepository.existsByEmail(user.getEmail())) {
             return null; // indicate user exists
         }
         return userRepository.save(user);
+    }
+
+
+    //seach user by email
+    public User searchByEmail(String email){
+        return userRepository.searchByEmail(email);
     }
 }
