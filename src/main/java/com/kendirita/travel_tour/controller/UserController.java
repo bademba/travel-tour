@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 
 import java.text.SimpleDateFormat;
@@ -25,18 +24,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    RestTemplate restTemplate = new RestTemplate();
 
     Date date = new Date();
     SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     String timestamp = DateFor.format(date);
 
-    String methodName = "";
 
     @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody User user){
-        methodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        User createdUser = userService.createUser(user);
+         User createdUser = userService.createUser(user);
          if(createdUser == null){
             return ResponseHandler.generateResponse(UUID.randomUUID(), "User already exists", HttpStatus.CONFLICT, null, timestamp
             );

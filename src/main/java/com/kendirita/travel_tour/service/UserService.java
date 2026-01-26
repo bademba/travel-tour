@@ -16,7 +16,7 @@ public class UserService {
     //Create a new user
     public User createUser(User user){
         if(userRepository.existsByEmail(user.getEmail())) {
-            return null; // indicate user exists
+            return null;
         }
         return userRepository.save(user);
     }
