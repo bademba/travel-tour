@@ -41,22 +41,25 @@ public class LoggingFilter extends OncePerRequestFilter {
         long timeTaken = System.currentTimeMillis() - startTime;
 
         String requestBody = getStringValue(requestWrapper.getContentAsByteArray(), request.getCharacterEncoding());
-        String responseBody = getStringValue(responseWrapper.getContentAsByteArray(), response.getCharacterEncoding());
 
-        // 2️⃣ Try to extract responseId from response body, but fallback to logId
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            if (responseBody != null && !responseBody.isEmpty()) {
-                JsonNode jsonNode = mapper.readTree(responseBody);
-                String responseId = jsonNode.path("responseId").asText(null);
-                if (responseId != null && !responseId.isEmpty()) {
-                    logId = responseId; // override logId if response has responseId
-                }
+            ObjectMapper mapper = new ObjectMapper();
+            if(requestBody != null && !requestBody.isBlank()) {
+                JsonNode jsonNode = mapper.readTree(requestBody);
+                requestBody = mapper.writeValueAsString(jsonNode); // compact single-line
             }
         } catch (Exception e) {
-            // keep logId as the generated UUID if parsing fails
-            LOGGER.warn("Failed to parse response body for responseId: {}", e.getMessage());
-        }
+            }
+
+        String responseBody = getStringValue(responseWrapper.getContentAsByteArray(), response.getCharacterEncoding());
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            if(responseBody != null && !responseBody.isBlank()) {
+                JsonNode jsonNode = mapper.readTree(responseBody);
+                responseBody = mapper.writeValueAsString(jsonNode);
+            }
+        } catch (Exception e) {
+            }
 
         // 3️⃣ OS detection (keep your existing code)
         String browserDetails = request.getHeader("User-Agent");
