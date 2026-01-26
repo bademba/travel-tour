@@ -5,6 +5,8 @@ import com.kendirita.travel_tour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -18,9 +20,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
-    //seach user by email
+    //search user by email
     public User searchByEmail(String email){
         return userRepository.searchByEmail(email);
+    }
+
+    //fetch all users
+    public List<User> listUsers(){
+        return userRepository.findAll();
     }
 }

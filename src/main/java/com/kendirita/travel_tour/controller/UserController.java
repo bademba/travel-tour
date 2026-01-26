@@ -33,7 +33,7 @@ public class UserController {
 
     String methodName = "";
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody User user){
         methodName = new Object(){}.getClass().getEnclosingMethod().getName();
         User createdUser = userService.createUser(user);
@@ -45,12 +45,17 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/{email}")
+    @GetMapping("/users/{email}")
     public ResponseEntity<Object> searchBYEmail(@PathVariable String email){
         User userEmail = userService.searchByEmail(email);
         if(userEmail==null){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"User not found",HttpStatus.NOT_FOUND,"",timestamp);
         }
         return ResponseHandler.generateResponse(UUID.randomUUID(),"User details found",HttpStatus.OK,userEmail,timestamp);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<Object> listUsers(){
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Users found",HttpStatus.OK,userService.listUsers(),timestamp);
     }
 }
