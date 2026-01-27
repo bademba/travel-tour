@@ -8,10 +8,7 @@ import com.kendirita.travel_tour.util.TimestampUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -32,6 +29,49 @@ public class DestinationController {
             return  ResponseHandler.generateResponse(UUID.randomUUID(),"Destination already exists", HttpStatus.CONFLICT,null, TimestampUtil.now());
         }
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination created successfully",HttpStatus.CREATED,createdDestination,TimestampUtil.now());
+    }
+
+    @GetMapping("/destinations")
+    public ResponseEntity<Object> listAllDestinations(){
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destinations found",HttpStatus.OK,destinationRepository.findAll(),TimestampUtil.now());
+    }
+
+
+    @GetMapping("/destinations/{id}")
+    public ResponseEntity<Object> searchDestinationById(@PathVariable String id){
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination found",HttpStatus.OK,destinationService.searchDestinationById(id),TimestampUtil.now());
+    }
+
+    @PutMapping("/destinations/{id}")
+    public ResponseEntity<Object> updateDestination(@PathVariable String id, @RequestBody Destination destination){
+        Destination currentDestination = destinationService.searchDestinationById(id);
+        if (currentDestination==null){
+            return  ResponseHandler.generateResponse(UUID.randomUUID(),"Destination not found",HttpStatus.OK,null,TimestampUtil.now());
+        }
+        currentDestination.setName(destination.getName());
+        currentDestination.setCountry(destination.getCountry());
+        currentDestination.setRegion(destination.getRegion());
+        currentDestination.setDescription(destination.getDescription());
+        currentDestination.setParkFeesAdult(destination.getParkFeesAdult());
+        currentDestination.setParkFeesChild(destination.getParkFeesChild());
+        currentDestination.setBestSeason(destination.getBestSeason());
+        currentDestination.setClimate(destination.getClimate());
+        currentDestination.setVisaInfo(destination.getVisaInfo());
+        currentDestination.setImageUrl(destination.getImageUrl());
+        currentDestination.setActive(destination.isActive());
+        currentDestination.setUpdatedAt(destination.getUpdatedAt());
+
+        Destination updatedDestination = destinationRepository.save(currentDestination);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination updated successfully",HttpStatus.OK,updatedDestination,TimestampUtil.now());
+    }
+
+    @DeleteMapping("/destinations/{id}")
+    public ResponseEntity<Object> deleteDestination(@PathVariable String id){
+        boolean destinationToBeDeleted = destinationService.deleteDestinationById(id);
+        if (!destinationToBeDeleted){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination not found",HttpStatus.OK,null, TimestampUtil.now());
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
     }
 
 }
