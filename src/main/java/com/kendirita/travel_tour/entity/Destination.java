@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "destination")
+@Table(name = "destinations", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Destination {
 
     @Id
@@ -33,8 +33,8 @@ public class Destination {
     @Column(name = "park_fees_child")
     public BigDecimal parkFeesChild;
 
-    @Column(name = "best_reason")
-    public String bestReason;
+    @Column(name = "best_season")
+    public String bestSeason;
 
     @Column(name = "climate")
     public String climate;
@@ -125,12 +125,12 @@ public class Destination {
         this.parkFeesChild = parkFeesChild;
     }
 
-    public String getBestReason() {
-        return bestReason;
+    public String getBestSeason() {
+        return bestSeason;
     }
 
-    public void setBestReason(String bestReason) {
-        this.bestReason = bestReason;
+    public void setBestSeason(String bestSeason) {
+        this.bestSeason = bestSeason;
     }
 
     public String getClimate() {
