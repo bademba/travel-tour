@@ -44,7 +44,7 @@ public class SupplierController {
 
 
     @PutMapping("/suppliers/{id}")
-    public ResponseEntity<Object> updateSupplierById(@PathVariable String id , @RequestBody Suppliers suppliers){
+    public ResponseEntity<Object> updateSupplier(@PathVariable String id , @RequestBody Suppliers suppliers){
         Suppliers currentSupplier = supplierService.searchById(id);
         if (currentSupplier==null){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
@@ -66,7 +66,7 @@ public class SupplierController {
     }
 
     @DeleteMapping("/suppliers/{id}")
-    public ResponseEntity<Object> deleteSupplierById(@PathVariable String id){
+    public ResponseEntity<Object> deleteSupplier(@PathVariable String id){
         boolean supplierToBeDeleted = supplierService.deleteById(id);
         if (!supplierToBeDeleted){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());

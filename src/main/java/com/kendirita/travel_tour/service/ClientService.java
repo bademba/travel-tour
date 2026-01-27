@@ -1,10 +1,12 @@
 package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Client;
+import com.kendirita.travel_tour.entity.User;
 import com.kendirita.travel_tour.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -21,12 +23,22 @@ public class ClientService {
     }
 
     //search client by email
-    public  Client searchClientByEmail(String email){
-        return clientRepository.searchByEmail(email);
+    public  Client searchClientById(String id){
+        return clientRepository.searchById(id);
     }
 
     //list all clients
     public List<Client> listClients(){
         return clientRepository.findAll();
+    }
+
+    public boolean deleteClientById(String id){
+        Optional<Client> client = Optional.ofNullable(clientRepository.searchById(id));
+        if (client.isEmpty()) {
+            return false;
+        }
+        clientRepository.delete(client.get());
+        return true;
+
     }
 }
