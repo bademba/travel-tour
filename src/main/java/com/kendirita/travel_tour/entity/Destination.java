@@ -3,8 +3,7 @@ package com.kendirita.travel_tour.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import javax.print.attribute.standard.MediaSize;
-import java.math.BigDecimal;
+ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity

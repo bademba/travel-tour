@@ -37,8 +37,6 @@ public class Client {
     @Column(name="accessibility_needs")
     public String accessibilityNeeds;
 
-//    @Column(name = "preferences")
-//    private String preferences;
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ClientPreference preferences;
 
