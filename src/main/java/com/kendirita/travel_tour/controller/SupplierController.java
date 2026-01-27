@@ -8,10 +8,7 @@ import com.kendirita.travel_tour.util.TimestampUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -33,4 +30,48 @@ public class SupplierController {
         }
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier created successfully",HttpStatus.CREATED,createdSuppliers,TimestampUtil.now());
     }
+
+    @GetMapping("/suppliers/{id}")
+    public ResponseEntity<Object> searchSupplierById(@PathVariable String id){
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier details found",HttpStatus.OK,supplierService.searchById(id),TimestampUtil.now());
+    }
+
+
+    @GetMapping("/suppliers")
+    public ResponseEntity<Object> listAllSuppliers(){
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Suppliers found",HttpStatus.OK,supplierService.listAllSuppliers(),TimestampUtil.now());
+    }
+
+
+    @PutMapping("/suppliers/{id}")
+    public ResponseEntity<Object> updateSupplier(@PathVariable String id , @RequestBody Suppliers suppliers){
+        Suppliers currentSupplier = supplierService.searchById(id);
+        if (currentSupplier==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+        currentSupplier.setName(suppliers.getName());
+        currentSupplier.setType(suppliers.getType());
+        currentSupplier.setEmail(suppliers.getEmail());
+        currentSupplier.setPhone(suppliers.getPhone());
+        currentSupplier.setAddress(suppliers.getAddress());
+        currentSupplier.setContactPerson(suppliers.getContactPerson());
+        currentSupplier.setCommissionRate(suppliers.getCommissionRate());
+        currentSupplier.setRating(suppliers.getRating());
+        currentSupplier.setNotes(suppliers.getNotes());
+        currentSupplier.setActive(suppliers.isActive());
+        currentSupplier.setUpdatedAt(suppliers.getUpdatedAt());
+
+        Suppliers updatedSupplier = supplierRepository.save(currentSupplier);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier updated successfully",HttpStatus.OK,updatedSupplier,TimestampUtil.now());
+    }
+
+    @DeleteMapping("/suppliers/{id}")
+    public ResponseEntity<Object> deleteSupplier(@PathVariable String id){
+        boolean supplierToBeDeleted = supplierService.deleteById(id);
+        if (!supplierToBeDeleted){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
+    }
+
 }

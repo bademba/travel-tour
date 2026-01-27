@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SupplierRepository  extends JpaRepository<Suppliers,String> {
     boolean existsByEmail(String email);
+    Suppliers searchByEmail(String email);
+    Suppliers deleteByEmail(String email);
+    Suppliers searchById(String id);
 }
