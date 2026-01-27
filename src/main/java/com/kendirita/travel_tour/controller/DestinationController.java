@@ -33,13 +33,13 @@ public class DestinationController {
 
     @GetMapping("/destinations")
     public ResponseEntity<Object> listAllDestinations(){
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destinations found",HttpStatus.OK,destinationRepository.findAll(),TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destinations found",HttpStatus.OK,destinationService.listAllDestinations(),TimestampUtil.now());
     }
 
 
     @GetMapping("/destinations/{id}")
     public ResponseEntity<Object> searchDestinationById(@PathVariable String id){
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination found",HttpStatus.OK,destinationService.searchDestinationById(id),TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination details found",HttpStatus.OK,destinationService.searchDestinationById(id),TimestampUtil.now());
     }
 
     @PutMapping("/destinations/{id}")
