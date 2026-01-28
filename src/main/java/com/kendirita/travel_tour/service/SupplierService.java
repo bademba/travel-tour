@@ -1,6 +1,7 @@
 package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Suppliers;
+import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class SupplierService {
     }
 
     public Suppliers searchById(String id){
-        return supplierRepository.searchById(id);
+        return supplierRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Supplier not found with ID" +id));
     }
 
     public List<Suppliers> listAllSuppliers(){

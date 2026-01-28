@@ -1,6 +1,7 @@
 package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Destination;
+import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,10 @@ public class DestinationService {
         return destinationRepository.findAll();
     }
 
-    public Destination searchDestinationById(String id){
-        return destinationRepository.searchById(id);
+    public Destination searchDestinationById(String id) {
+        return destinationRepository.findById(id).orElseThrow(() ->
+                        new ResourceNotFoundException("Destination not found with id: " + id)
+                );
     }
 
     public  boolean deleteDestinationById(String id){
