@@ -15,14 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //Create a new user
-//    public User createUser(User user){
-//        if(userRepository.existsByEmail(user.getEmail())) {
-//            return null;
-//        }
-//        return userRepository.save(user);
-//    }
-
+    //create new user
     @Transactional
     public User createUser(User user) {
 

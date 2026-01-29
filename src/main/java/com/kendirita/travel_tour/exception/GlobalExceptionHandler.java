@@ -22,4 +22,14 @@ public class GlobalExceptionHandler {
                 TimestampUtil.now()
         );
     }
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Object> handleIllegalStateException(IllegalStateException ex) {
+        return ResponseHandler.generateResponse(
+                UUID.randomUUID(),
+                ex.getMessage(),
+                HttpStatus.CONFLICT,
+                null,
+                TimestampUtil.now()
+        );
+    }
 }

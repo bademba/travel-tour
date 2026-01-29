@@ -15,9 +15,6 @@ public class Profile {
     @Column(name = "id", nullable = false, updatable = false)
     private String id;
 
-//    @Column(name = "user_id")
-//    private String userId;
-
     @Column(name = "full_name")
     private String fullName;
 
@@ -63,14 +60,6 @@ public class Profile {
     public void setId(String id) {
         this.id = id;
     }
-
-//    public String getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(String userId) {
-//        this.userId = userId;
-//    }
 
     public String getFullName() {
         return fullName;
