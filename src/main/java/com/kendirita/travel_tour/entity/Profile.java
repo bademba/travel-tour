@@ -1,26 +1,39 @@
 package com.kendirita.travel_tour.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
-
 @Entity
-@Table(name="users")
-public class User {
+@Table(name = "profiles")
+public class Profile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    public String id;
+    @Column(name = "id", nullable = false, updatable = false)
+    private String id;
+
+//    @Column(name = "user_id")
+//    private String userId;
+
+    @Column(name = "full_name")
+    private String fullName;
 
     @Column(name="email", unique = true)
-    public String email;
+    private String email;
 
-    @Column(name="full_name")
-    public String fullName;
+    @Column(name="phone")
+    private String phone;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Profile profile;
+    @Column(name="avatar_url")
+    private String avatarUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     @Column(name = "created_at", updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
@@ -30,7 +43,7 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     public Date updatedAt;
 
-    public User(){}
+    public Profile(){}
 
     @PrePersist
     protected void onCreate() {
@@ -51,13 +64,13 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
 
     public String getFullName() {
         return fullName;
@@ -67,12 +80,36 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getEmail() {
+        return email;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getCreatedAt() {

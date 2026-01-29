@@ -1,9 +1,12 @@
 package com.kendirita.travel_tour.service;
 
+import com.kendirita.travel_tour.entity.Profile;
 import com.kendirita.travel_tour.entity.User;
 import com.kendirita.travel_tour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +16,28 @@ public class UserService {
     private UserRepository userRepository;
 
     //Create a new user
-    public User createUser(User user){
-        if(userRepository.existsByEmail(user.getEmail())) {
-            return null;
+//    public User createUser(User user){
+//        if(userRepository.existsByEmail(user.getEmail())) {
+//            return null;
+//        }
+//        return userRepository.save(user);
+//    }
+
+    @Transactional
+    public User createUser(User user) {
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalStateException("User with this email already exists");
         }
+
+        Profile profile = user.getProfile();
+
+        if (profile != null) {
+            profile.setUser(user);
+            profile.setFullName(user.getFullName());
+            profile.setEmail(user.getEmail());
+        }
+
         return userRepository.save(user);
     }
 
