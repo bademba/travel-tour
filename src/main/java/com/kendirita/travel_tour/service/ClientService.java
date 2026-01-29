@@ -1,6 +1,7 @@
 package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Client;
+import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class ClientService {
 
     //search client by email
     public  Client searchClientById(String id){
-        return clientRepository.searchById(id);
+        return clientRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Client not found with ID "+id));
     }
 
     //list all clients
