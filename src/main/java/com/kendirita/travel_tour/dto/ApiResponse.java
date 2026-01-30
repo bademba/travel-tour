@@ -20,7 +20,7 @@ public class ApiResponse<T> {
         this.timestamp = LocalDateTime.now();
     }
 
-    // ✅ Success factory method
+    // Success factory method
     public static <T> ApiResponse<T> success(T data, String message) {
         return new ApiResponse<>(data, message, 201);
     }
@@ -30,7 +30,7 @@ public class ApiResponse<T> {
         return new ApiResponse<>(null, message, status);
     }
 
-    // getters only (no setters needed)
+    // getters
     public T getData() {
         return data;
     }

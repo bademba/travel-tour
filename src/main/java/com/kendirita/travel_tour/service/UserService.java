@@ -2,6 +2,7 @@ package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Profile;
 import com.kendirita.travel_tour.entity.User;
+import com.kendirita.travel_tour.entity.UserRole;
 import com.kendirita.travel_tour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class UserService {
             profile.setUser(user);
             profile.setFullName(user.getFullName());
             profile.setEmail(user.getEmail());
+        }
+
+        UserRole userRole = user.getUserRole();
+        if (userRole != null){
+            userRole.setUser(user);
+            user.setUserRole(userRole);
         }
 
         return userRepository.save(user);
