@@ -12,7 +12,7 @@ public class UserRole {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Roles roles;
+    private Roles role;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -29,13 +29,13 @@ public class UserRole {
         this.id = id;
     }
 
-    public Roles getRoles() {
-        return roles;
+    public Roles getRole() {
+        return role;
     }
 
 
-    public void setRoles(Roles roles) {
-        this.roles = roles;
+    public void setRoles(Roles role) {
+        this.role = role;
     }
 
     public User getUser() {

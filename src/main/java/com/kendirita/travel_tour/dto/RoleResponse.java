@@ -7,11 +7,11 @@ public class RoleResponse {
     private String role;
 
     public static RoleResponse from(UserRole userRole){
-        if (userRole==null){
+        if (userRole==null || userRole.getRole() == null){
             return null;
         }
         RoleResponse dto =new RoleResponse();
-        dto.role= userRole.getRoles().name();
+        dto.role= userRole.getRole().name();
         return dto;
     }
 
