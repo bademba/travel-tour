@@ -12,6 +12,7 @@ public class UserResponse {
     private Date createdAt;
     private Date updatedAt;
     private ProfileResponse profile;
+    private RoleResponse userRole;
 
     public static UserResponse from(User user) {
 
@@ -22,6 +23,7 @@ public class UserResponse {
         dto.createdAt = user.getCreatedAt();
         dto.updatedAt = user.getUpdatedAt();
         dto.profile = ProfileResponse.from(user.getProfile());
+        dto.userRole = RoleResponse.from(user.getUserRole());
 
         return dto;
     }
@@ -50,5 +52,8 @@ public class UserResponse {
         return profile;
     }
 
-    // getters
+    public RoleResponse getUserRole() {
+        return userRole;
+    }
+
 }
