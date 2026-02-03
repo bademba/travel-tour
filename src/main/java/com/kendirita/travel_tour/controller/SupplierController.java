@@ -26,7 +26,7 @@ public class SupplierController {
     public ResponseEntity createSupplier(@RequestBody Suppliers suppliers){
         Suppliers createdSuppliers = supplierService.createSupplier(suppliers);
         if (createdSuppliers==null){
-            return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier already exists", HttpStatus.MULTI_STATUS.CONFLICT,null, TimestampUtil.now());
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier already exists", HttpStatus.CONFLICT,null, TimestampUtil.now());
         }
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier created successfully",HttpStatus.CREATED,createdSuppliers,TimestampUtil.now());
     }
