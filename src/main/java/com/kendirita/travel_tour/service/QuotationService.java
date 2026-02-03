@@ -2,12 +2,16 @@ package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Client;
 import com.kendirita.travel_tour.entity.Quotation;
+import com.kendirita.travel_tour.entity.Suppliers;
 import com.kendirita.travel_tour.entity.User;
+import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.ClientRepository;
 import com.kendirita.travel_tour.repository.QuotationRepository;
 import com.kendirita.travel_tour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class QuotationService {
@@ -30,5 +34,14 @@ public class QuotationService {
         quotation.setUser(user);
         quotation.setClient(client);
         return quotationRepository.save(quotation);
+    }
+
+
+    public Quotation searchById(String id){
+        return quotationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Supplier not found with ID" +id));
+    }
+
+    public List<Quotation> listAllQuotations(){
+        return quotationRepository.findAll();
     }
 }
