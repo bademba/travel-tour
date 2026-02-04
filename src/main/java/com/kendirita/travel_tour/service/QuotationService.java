@@ -10,6 +10,7 @@ import com.kendirita.travel_tour.repository.QuotationRepository;
 import com.kendirita.travel_tour.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -43,5 +44,26 @@ public class QuotationService {
 
     public List<Quotation> listAllQuotations(){
         return quotationRepository.findAll();
+    }
+
+    @Transactional
+    public Quotation updateQuotation(
+            Quotation quotation,
+            String clientId,
+            String createdByEmail) {
+
+        if (clientId != null) {
+            Client client = clientRepository.findById(clientId)
+                    .orElseThrow(() -> new IllegalStateException("Client not found"));
+            quotation.setClient(client);
+        }
+
+        if (createdByEmail != null) {
+            User user = userRepository.findByEmail(createdByEmail)
+                    .orElseThrow(() -> new IllegalStateException("User not found"));
+            quotation.setUser(user);
+        }
+
+        return quotationRepository.save(quotation);
     }
 }
