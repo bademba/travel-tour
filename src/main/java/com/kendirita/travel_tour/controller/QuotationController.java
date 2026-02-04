@@ -1,6 +1,5 @@
 package com.kendirita.travel_tour.controller;
 
-import com.kendirita.travel_tour.entity.Client;
 import com.kendirita.travel_tour.entity.Quotation;
 import com.kendirita.travel_tour.entity.QuotationStatus;
 import com.kendirita.travel_tour.repository.QuotationRepository;
@@ -11,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -29,37 +26,7 @@ public class QuotationController {
     private QuotationService quotationService;
 
     @Autowired
-    private ObjectMapper objectMapper;
-
-
-//    @PostMapping("/quote")
-//    public ResponseEntity createQuote(@RequestBody Map<String,Object> payload){
-//        Quotation quotation = objectMapper.convertValue(payload, Quotation.class);
-//        quotation.setQuoteNumber((String) payload.get("quoteNumber"));
-//
-//        quotation.setQuoteNumber((String) payload.get("quoteNumber"));
-//        quotation.setTitle((String) payload.get("title"));
-//        quotation.setStartDate((Date) payload.get("startDate"));
-//        quotation.setEndDate((Date) payload.get("endDate"));
-//        quotation.setReturnDate((Date) payload.get("returnDate"));
-//        quotation.setPaxAdults((int) payload.get("paxAdults"));
-//        quotation.setPaxChildren((int) payload.get("paxChildren"));
-//        quotation.setPaxYteen((int) payload.get("paxYteen"));
-//        quotation.setTotalAmount((BigDecimal) payload.get("totalAmount"));
-//        quotation.setCurrency((String) payload.get("currency"));
-//        quotation.setStatus(QuotationStatus.valueOf((String) payload.get("status")));
-//        quotation.setComparisonMode((Boolean) payload.get("comparisonMode"));
-//        quotation.setItinerary((String) payload.get("itinerary"));
-//        quotation.setResidencyStatus((String) payload.get("residencyStatus"));
-//        quotation.setMarkupPercent((BigDecimal) payload.get("markupPercent"));
-//        quotation.setNotes((String) payload.get("notes"));
-//        String createdBy = (String) payload.get("createdBy");
-//        String clientId = (String) payload.get("clientId");
-//        Quotation savedQuotation = quotationService.createQuotation(quotation, createdBy, clientId);
-//
-//        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote created successfully",HttpStatus.CREATED,savedQuotation,TimestampUtil.now());
-//    }
-
+    private QuotationRepository quotationRepository;
 
 
     @PostMapping("/quote")
@@ -67,7 +34,6 @@ public class QuotationController {
 
         Quotation quotation = new Quotation();
 
-        // ---------- SIMPLE STRINGS ----------
         quotation.setQuoteNumber((String) payload.get("quoteNumber"));
         quotation.setTitle((String) payload.get("title"));
         quotation.setCurrency((String) payload.get("currency"));
@@ -75,45 +41,20 @@ public class QuotationController {
         quotation.setResidencyStatus((String) payload.get("residencyStatus"));
         quotation.setNotes((String) payload.get("notes"));
 
-        // ---------- BOOLEANS ----------
-        quotation.setComparisonMode(
-                payload.get("comparisonMode") != null &&
-                        Boolean.parseBoolean(payload.get("comparisonMode").toString())
-        );
+        quotation.setComparisonMode(payload.get("comparisonMode") != null && Boolean.parseBoolean(payload.get("comparisonMode").toString()));
 
-        // ---------- INTEGERS ----------
-        quotation.setPaxAdults(
-                payload.get("paxAdults") == null ? 0 :
-                        Integer.parseInt(payload.get("paxAdults").toString())
-        );
+        quotation.setPaxAdults(payload.get("paxAdults") == null ? 0 : Integer.parseInt(payload.get("paxAdults").toString()));
 
-        quotation.setPaxChildren(
-                payload.get("paxChildren") == null ? 0 :
-                        Integer.parseInt(payload.get("paxChildren").toString())
-        );
+        quotation.setPaxChildren(payload.get("paxChildren") == null ? 0 : Integer.parseInt(payload.get("paxChildren").toString()));
 
-        quotation.setPaxYteen(
-                payload.get("paxYteen") == null ? 0 :
-                        Integer.parseInt(payload.get("paxYteen").toString())
-        );
+        quotation.setPaxYteen(payload.get("paxYteen") == null ? 0 : Integer.parseInt(payload.get("paxYteen").toString()));
 
-        // ---------- BIGDECIMALS ----------
-        quotation.setTotalAmount(
-                payload.get("totalAmount") == null ? BigDecimal.ZERO :
-                        new BigDecimal(payload.get("totalAmount").toString())
-        );
+        quotation.setTotalAmount(payload.get("totalAmount") == null ? BigDecimal.ZERO : new BigDecimal(payload.get("totalAmount").toString()));
 
-        quotation.setMarkupPercent(
-                payload.get("markupPercent") == null ? BigDecimal.ZERO :
-                        new BigDecimal(payload.get("markupPercent").toString())
-        );
+        quotation.setMarkupPercent(payload.get("markupPercent") == null ? BigDecimal.ZERO : new BigDecimal(payload.get("markupPercent").toString()));
 
-        // ---------- ENUM ----------
-        quotation.setStatus(
-                QuotationStatus.from(payload.get("status").toString())
-        );
+        quotation.setStatus(QuotationStatus.from(payload.get("status").toString()));
 
-        // ---------- DATES ----------
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -130,20 +71,14 @@ public class QuotationController {
             throw new IllegalArgumentException("Invalid date format. Use yyyy-MM-dd HH:mm:ss");
         }
 
-        // ---------- RELATION FIELDS ----------
+
         String createdBy = (String) payload.get("createdBy");
         String clientId  = (String) payload.get("clientId");
 
         Quotation savedQuotation =
                 quotationService.createQuotation(quotation, createdBy, clientId);
 
-        return ResponseHandler.generateResponse(
-                UUID.randomUUID(),
-                "Quote created successfully",
-                HttpStatus.CREATED,
-                savedQuotation,
-                TimestampUtil.now()
-        );
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote created successfully", HttpStatus.CREATED, savedQuotation, TimestampUtil.now());
     }
 
     @GetMapping("/quote/{id}")
@@ -154,5 +89,40 @@ public class QuotationController {
     @GetMapping("/quote")
     public ResponseEntity<Object> listAllQuotations(){
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Quotes found",HttpStatus.OK,quotationService.listAllQuotations(),TimestampUtil.now());
+    }
+
+    @PutMapping("/quote/{id}")
+    public ResponseEntity<Object> updateQuote(@RequestBody Map<String,Object> quotation , @PathVariable String id){
+        Quotation currentQuotation = quotationService.searchById(id);
+        if (currentQuotation==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+
+
+        currentQuotation.setTitle((String) quotation.get("title"));
+        //currentQuotation.setStartDate((Date) quotation.get("startDate"));
+//        currentQuotation.setEndDate((Date) quotation.get("endDate"));
+//        currentQuotation.setReturnDate((Date) quotation.get("returnDate"));
+        currentQuotation.setPaxAdults((Integer) quotation.get("paxAdults"));
+        currentQuotation.setPaxChildren((Integer) quotation.get("paxChildren"));
+        currentQuotation.setPaxYteen((Integer) quotation.get("paxYteen"));
+//        currentQuotation.setTotalAmount((BigDecimal) quotation.get("totalAmount"));
+        currentQuotation.setCurrency((String) quotation.get("currency"));
+        //currentQuotation.setStatus((String) quotation.get("status"));
+        currentQuotation.setComparisonMode(
+                quotation.get("comparisonMode") != null && (Boolean) quotation.get("comparisonMode")
+        );
+        currentQuotation.setItinerary((String) quotation.get("itinerary"));
+        currentQuotation.setResidencyStatus((String) quotation.get("residencyStatus"));
+//        currentQuotation.setMarkupPercent((BigDecimal) quotation.get("markupPercent"));
+        currentQuotation.setNotes((String) quotation.get("notes"));
+
+
+
+
+        String clientId  = (String) quotation.get("clientId");
+        String createdBy = (String) quotation.get("createdBy");
+        Quotation updatedQuotation = quotationService.updateQuotation(currentQuotation, clientId, createdBy);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote updated successfully",HttpStatus.OK,updatedQuotation,TimestampUtil.now());
     }
 }
