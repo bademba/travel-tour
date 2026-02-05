@@ -100,25 +100,41 @@ public class QuotationController {
 
 
         currentQuotation.setTitle((String) quotation.get("title"));
-        //currentQuotation.setStartDate((Date) quotation.get("startDate"));
-//        currentQuotation.setEndDate((Date) quotation.get("endDate"));
-//        currentQuotation.setReturnDate((Date) quotation.get("returnDate"));
+        currentQuotation.setStartDate(TimestampUtil.parseDate(quotation.get("startDate")) );
+        currentQuotation.setEndDate(TimestampUtil.parseDate(quotation.get("endDate")) );
+        currentQuotation.setReturnDate(TimestampUtil.parseDate(quotation.get("returnDate")) );
         currentQuotation.setPaxAdults((Integer) quotation.get("paxAdults"));
         currentQuotation.setPaxChildren((Integer) quotation.get("paxChildren"));
         currentQuotation.setPaxYteen((Integer) quotation.get("paxYteen"));
-//        currentQuotation.setTotalAmount((BigDecimal) quotation.get("totalAmount"));
         currentQuotation.setCurrency((String) quotation.get("currency"));
-        //currentQuotation.setStatus((String) quotation.get("status"));
+
+//        currentQuotation.setStatus((QuotationStatus) quotation.get("status"));
         currentQuotation.setComparisonMode(
                 quotation.get("comparisonMode") != null && (Boolean) quotation.get("comparisonMode")
         );
         currentQuotation.setItinerary((String) quotation.get("itinerary"));
         currentQuotation.setResidencyStatus((String) quotation.get("residencyStatus"));
-//        currentQuotation.setMarkupPercent((BigDecimal) quotation.get("markupPercent"));
         currentQuotation.setNotes((String) quotation.get("notes"));
 
+        Object amountObj = quotation.get("totalAmount");
+        if (amountObj != null) {
+            currentQuotation.setTotalAmount(new BigDecimal(amountObj.toString()));
+        }
+
+        Object markupPercentage = quotation.get("markupPercent");
+        if (markupPercentage != null) {
+            currentQuotation.setMarkupPercent(new BigDecimal(markupPercentage.toString()));
+        }
 
 
+
+
+
+//        if (quotation.get("status") != null) {
+//            currentQuotation.setStatus(
+//                    QuotationStatus.from(quotation.get("status").toString())
+//            );
+//        }
 
         String clientId  = (String) quotation.get("clientId");
         String createdBy = (String) quotation.get("createdBy");
