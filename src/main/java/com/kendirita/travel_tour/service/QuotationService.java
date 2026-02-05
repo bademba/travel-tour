@@ -39,7 +39,7 @@ public class QuotationService {
 
 
     public Quotation searchById(String id){
-        return quotationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Supplier not found with ID" +id));
+        return quotationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quote not found with ID " +id));
     }
 
     public List<Quotation> listAllQuotations(){
