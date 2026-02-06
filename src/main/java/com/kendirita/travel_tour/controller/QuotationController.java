@@ -1,7 +1,10 @@
 package com.kendirita.travel_tour.controller;
 
+import com.kendirita.travel_tour.dto.QuotationResponse;
+import com.kendirita.travel_tour.dto.UserResponse;
 import com.kendirita.travel_tour.entity.Quotation;
 import com.kendirita.travel_tour.entity.QuotationStatus;
+import com.kendirita.travel_tour.entity.User;
 import com.kendirita.travel_tour.repository.QuotationRepository;
 import com.kendirita.travel_tour.response.ResponseHandler;
 import com.kendirita.travel_tour.service.QuotationService;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -77,17 +81,20 @@ public class QuotationController {
         Quotation savedQuotation =
                 quotationService.createQuotation(quotation, createdBy, clientId);
 
-        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote created successfully", HttpStatus.CREATED, savedQuotation, TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote created successfully", HttpStatus.CREATED, QuotationResponse.from(savedQuotation), TimestampUtil.now());
     }
 
     @GetMapping("/quote/{id}")
     public  ResponseEntity<Object> searchByQuoteId(@PathVariable String id){
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote details found",HttpStatus.OK,quotationService.searchById(id),TimestampUtil.now());
+        Quotation quoteId=quotationService.searchById(id);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote details found",HttpStatus.OK, QuotationResponse.from(quoteId),TimestampUtil.now());
     }
 
     @GetMapping("/quote")
     public ResponseEntity<Object> listAllQuotations(){
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quotes found",HttpStatus.OK,quotationService.listAllQuotations(),TimestampUtil.now());
+        List<Quotation> quotations =quotationService.listAllQuotations();
+        List<QuotationResponse> quotationResponses=quotations.stream().map(QuotationResponse::from).toList();
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quotes found",HttpStatus.OK,quotationResponses,TimestampUtil.now());
     }
 
     @PutMapping("/quote/{id}")
@@ -129,7 +136,7 @@ public class QuotationController {
         String clientId  = (String) quotation.get("clientId");
         String createdBy = (String) quotation.get("createdBy");
         Quotation updatedQuotation = quotationService.updateQuotation(currentQuotation, clientId, createdBy);
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote updated successfully",HttpStatus.OK,updatedQuotation,TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote updated successfully",HttpStatus.OK,QuotationResponse.from(updatedQuotation),TimestampUtil.now());
     }
 
     @DeleteMapping("/quote/{id}")
