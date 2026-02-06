@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuotationService {
@@ -47,23 +48,28 @@ public class QuotationService {
     }
 
     @Transactional
-    public Quotation updateQuotation(
-            Quotation quotation,
-            String clientId,
-            String createdByEmail) {
+    public Quotation updateQuotation(Quotation quotation, String clientId, String createdByEmail) {
 
         if (clientId != null) {
-            Client client = clientRepository.findById(clientId)
-                    .orElseThrow(() -> new IllegalStateException("Client not found"));
+            Client client = clientRepository.findById(clientId).orElseThrow(() -> new IllegalStateException("Client not found"));
             quotation.setClient(client);
         }
 
         if (createdByEmail != null) {
-            User user = userRepository.findByEmail(createdByEmail)
-                    .orElseThrow(() -> new IllegalStateException("User not found"));
+            User user = userRepository.findByEmail(createdByEmail).orElseThrow(() -> new IllegalStateException("User not found"));
             quotation.setUser(user);
         }
 
         return quotationRepository.save(quotation);
+    }
+
+    public boolean deleteQuoteById(String id){
+        Optional<Quotation> quotes= Optional.ofNullable(quotationRepository.searchById(id));
+            if(quotes.isEmpty()){
+                return  false;
+            }
+            quotationRepository.delete(quotes.get());
+            return  true;
+
     }
 }
