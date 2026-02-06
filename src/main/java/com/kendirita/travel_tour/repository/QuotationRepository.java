@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuotationRepository  extends JpaRepository<Quotation,String> {
     boolean existsByQuoteNumber(String quoteNUmber);
+    Quotation searchById(String id);
 }

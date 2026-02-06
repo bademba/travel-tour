@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -127,18 +126,18 @@ public class QuotationController {
         }
 
 
-
-
-
-//        if (quotation.get("status") != null) {
-//            currentQuotation.setStatus(
-//                    QuotationStatus.from(quotation.get("status").toString())
-//            );
-//        }
-
         String clientId  = (String) quotation.get("clientId");
         String createdBy = (String) quotation.get("createdBy");
         Quotation updatedQuotation = quotationService.updateQuotation(currentQuotation, clientId, createdBy);
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote updated successfully",HttpStatus.OK,updatedQuotation,TimestampUtil.now());
+    }
+
+    @DeleteMapping("/quote/{id}")
+    public ResponseEntity<Object> deleteQuote(@PathVariable String id){
+        boolean quoteToBeDeleted = quotationService.deleteQuoteById(id);
+        if (!quoteToBeDeleted){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Quotation not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote deleted",HttpStatus.OK,"",TimestampUtil.now());
     }
 }
