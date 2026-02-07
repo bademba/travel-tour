@@ -1,6 +1,7 @@
 package com.kendirita.travel_tour.controller;
 
 import com.kendirita.travel_tour.dto.QuotationOptionRequest;
+import com.kendirita.travel_tour.dto.QuotationOptionResponse;
 import com.kendirita.travel_tour.entity.QuotationOptions;
 import com.kendirita.travel_tour.repository.QuotationOptionsRepository;
 import com.kendirita.travel_tour.response.ResponseHandler;
@@ -32,7 +33,7 @@ public class QuotationOptionsController {
 
         QuotationOptions created = quotationOptionsService.createQuotationOptions(request);
 
-        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote option created successfully", HttpStatus.CREATED, created, TimestampUtil.now()
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote option created successfully", HttpStatus.CREATED, QuotationOptionResponse.from(created), TimestampUtil.now()
         );
     }
 }

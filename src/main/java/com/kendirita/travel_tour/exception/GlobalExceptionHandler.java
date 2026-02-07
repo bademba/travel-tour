@@ -32,4 +32,15 @@ public class GlobalExceptionHandler {
                 TimestampUtil.now()
         );
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseHandler.generateResponse(
+                UUID.randomUUID(),
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND,
+                null,
+                TimestampUtil.now()
+        );
+    }
 }

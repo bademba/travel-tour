@@ -13,9 +13,6 @@ public class QuotationOptionsService {
     @Autowired
     private QuotationOptionsRepository quotationOptionsRepository;
 
-//    public QuotationOptions createQuotationOptions(QuotationOptions quotationOptions){
-//        return quotationOptionsRepository.save(quotationOptions);
-//    }
 
     @Autowired
     private QuotationRepository quotationRepository;
@@ -29,7 +26,7 @@ public class QuotationOptionsService {
         option.setQuotation(quotation);
         option.setOptionName(request.getOptionName());
         option.setOptionDescription(request.getOptionDescription());
-        option.setSelected(request.getSelected());
+        option.setIsSelected(request.getIsSelected());
         option.setTotalCost(request.getTotalCost());
         option.setTotalSelling(request.getTotalSelling());
 
