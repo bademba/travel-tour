@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class QuotationOptionResponse {
+    private String id;
     private String quotationId;
     private String optionName;
     private String optionDescription;
@@ -17,6 +18,7 @@ public class QuotationOptionResponse {
 
     public static QuotationOptionResponse from (QuotationOptions quotationOptions){
         QuotationOptionResponse dto = new QuotationOptionResponse();
+        dto.id=quotationOptions.getId();
         dto.optionName=quotationOptions.getOptionName();
         dto.optionDescription=quotationOptions.getOptionDescription();
         dto.isSelected=quotationOptions.getIsSelected();
@@ -26,6 +28,10 @@ public class QuotationOptionResponse {
         dto.createdAt=quotationOptions.getCreatedAt();
 
         return dto;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getQuotationId() {
