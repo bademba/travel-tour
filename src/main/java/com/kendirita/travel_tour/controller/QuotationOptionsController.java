@@ -2,7 +2,6 @@ package com.kendirita.travel_tour.controller;
 
 import com.kendirita.travel_tour.dto.QuotationOptionRequest;
 import com.kendirita.travel_tour.dto.QuotationOptionResponse;
-import com.kendirita.travel_tour.dto.QuotationResponse;
 import com.kendirita.travel_tour.entity.Quotation;
 import com.kendirita.travel_tour.entity.QuotationOptions;
 import com.kendirita.travel_tour.repository.QuotationOptionsRepository;
@@ -15,9 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
