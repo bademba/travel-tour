@@ -79,5 +79,14 @@ public class QuotationOptionsController {
     }
 
 
+    @DeleteMapping("/quote-option/{id}")
+    public ResponseEntity<Object> deleteQuoteOption(@PathVariable String id){
+        boolean quoteOptionToBeDeleted =quotationOptionsService.deletById(id);
+        if (!quoteOptionToBeDeleted){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote option not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote option deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
+
+    }
 
 }

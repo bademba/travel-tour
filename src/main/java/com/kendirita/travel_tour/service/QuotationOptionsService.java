@@ -3,6 +3,7 @@ package com.kendirita.travel_tour.service;
 import com.kendirita.travel_tour.dto.QuotationOptionRequest;
 import com.kendirita.travel_tour.entity.Quotation;
 import com.kendirita.travel_tour.entity.QuotationOptions;
+import com.kendirita.travel_tour.entity.Suppliers;
 import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.QuotationOptionsRepository;
 import com.kendirita.travel_tour.repository.QuotationRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuotationOptionsService {
@@ -42,6 +44,15 @@ public class QuotationOptionsService {
 
     public QuotationOptions searchById(String id){
         return quotationOptionsRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quote Option not found with ID " +id));
+    }
+
+    public boolean deletById(String id){
+        Optional<QuotationOptions> quotationOptions = Optional.ofNullable(quotationOptionsRepository.searchById(id));
+        if (quotationOptions.isEmpty()) {
+            return false;
+        }
+        quotationOptionsRepository.delete(quotationOptions.get());
+        return true;
     }
 
 }
