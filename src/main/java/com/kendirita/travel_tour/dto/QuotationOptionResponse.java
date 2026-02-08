@@ -46,7 +46,7 @@ public class QuotationOptionResponse {
         return optionDescription;
     }
 
-    public Boolean getSelected() {
+    public Boolean getIsSelected() {
         return isSelected;
     }
 

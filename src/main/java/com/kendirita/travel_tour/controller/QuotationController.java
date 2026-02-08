@@ -1,10 +1,8 @@
 package com.kendirita.travel_tour.controller;
 
 import com.kendirita.travel_tour.dto.QuotationResponse;
-import com.kendirita.travel_tour.dto.UserResponse;
 import com.kendirita.travel_tour.entity.Quotation;
 import com.kendirita.travel_tour.entity.QuotationStatus;
-import com.kendirita.travel_tour.entity.User;
 import com.kendirita.travel_tour.repository.QuotationRepository;
 import com.kendirita.travel_tour.response.ResponseHandler;
 import com.kendirita.travel_tour.service.QuotationService;

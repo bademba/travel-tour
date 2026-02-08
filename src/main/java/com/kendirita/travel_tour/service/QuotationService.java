@@ -2,7 +2,6 @@ package com.kendirita.travel_tour.service;
 
 import com.kendirita.travel_tour.entity.Client;
 import com.kendirita.travel_tour.entity.Quotation;
-import com.kendirita.travel_tour.entity.Suppliers;
 import com.kendirita.travel_tour.entity.User;
 import com.kendirita.travel_tour.exception.ResourceNotFoundException;
 import com.kendirita.travel_tour.repository.ClientRepository;

@@ -82,8 +82,8 @@ public class QuotationOptions {
         return isSelected;
     }
 
-    public void setIsSelected(Boolean selected) {
-        isSelected = selected;
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
     public BigDecimal getTotalCost() {
