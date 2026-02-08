@@ -43,4 +43,8 @@ public class QuotationOptionsService {
     public QuotationOptions searchById(String id){
         return quotationOptionsRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quote Option not found with ID " +id));
     }
+
+//    public QuotationOptions updateQuotationOption(String id,QuotationOptions quotationOptions){
+//        return quotationOptionsRepository.save(id,quotationOptions);
+//    }
 }
