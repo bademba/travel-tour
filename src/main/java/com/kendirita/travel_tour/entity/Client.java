@@ -1,5 +1,6 @@
 package com.kendirita.travel_tour.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kendirita.travel_tour.util.HybridIdGenerator;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
 @Table(name="clients")
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(length = 10, nullable = false, unique = true)
     public String id;
 
     @Column(name="full_name")
@@ -55,6 +56,9 @@ public class Client {
     protected void onCreate() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        if (this.id == null) {
+            this.id = HybridIdGenerator.generate();
+        }
     }
 
 

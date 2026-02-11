@@ -2,6 +2,7 @@ package com.kendirita.travel_tour.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kendirita.travel_tour.util.HybridIdGenerator;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -11,8 +12,7 @@ import java.util.Date;
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(length = 10, nullable = false, unique = true)
     private String id;
 
     @Column(name = "full_name")
@@ -46,6 +46,9 @@ public class Profile {
     protected void onCreate() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        if (this.id == null) {
+            this.id = HybridIdGenerator.generate();
+        }
     }
 
     @PreUpdate

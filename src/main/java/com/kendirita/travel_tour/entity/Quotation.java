@@ -11,8 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "quotations")
 public class Quotation {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.UUID)
+
     @Id
     @Column(length = 10, nullable = false, unique = true)
     private String id;
