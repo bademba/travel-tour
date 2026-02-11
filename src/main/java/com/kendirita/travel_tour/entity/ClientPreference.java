@@ -2,7 +2,10 @@ package com.kendirita.travel_tour.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kendirita.travel_tour.util.HybridIdGenerator;
 import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "clients_preference")
@@ -10,7 +13,7 @@ public class ClientPreference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false, unique = true,length = 10)
     private String id;
 
     @Enumerated(EnumType.STRING)
@@ -21,6 +24,13 @@ public class ClientPreference {
     @JoinColumn(name = "preference_id")
     @JsonIgnore
     private Client client;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.id == null) {
+            this.id = HybridIdGenerator.generate();
+        }
+    }
 
     public ClientPreference() {}
 

@@ -1,13 +1,16 @@
 package com.kendirita.travel_tour.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kendirita.travel_tour.util.HybridIdGenerator;
 import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "user_roles")
 public class UserRole {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(length = 10, nullable = false, unique = true)
     private String id;
 
     @Enumerated(EnumType.STRING)
@@ -20,6 +23,13 @@ public class UserRole {
     private User user;
 
     public  UserRole(){}
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.id == null) {
+            this.id = HybridIdGenerator.generate();
+        }
+    }
 
     public String getId() {
         return id;
