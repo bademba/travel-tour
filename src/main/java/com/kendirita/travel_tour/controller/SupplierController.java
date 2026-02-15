@@ -71,7 +71,7 @@ public class SupplierController {
         if (!supplierToBeDeleted){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
         }
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Supplier deleted successfully",HttpStatus.NO_CONTENT,"",TimestampUtil.now());
     }
 
 }

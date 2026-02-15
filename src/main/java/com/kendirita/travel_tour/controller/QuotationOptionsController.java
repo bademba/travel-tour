@@ -85,7 +85,7 @@ public class QuotationOptionsController {
         if (!quoteOptionToBeDeleted){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote option not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
         }
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote option deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote option deleted successfully",HttpStatus.NO_CONTENT,"",TimestampUtil.now());
 
     }
 

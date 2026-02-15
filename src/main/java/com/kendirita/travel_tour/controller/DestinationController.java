@@ -69,9 +69,9 @@ public class DestinationController {
     public ResponseEntity<Object> deleteDestination(@PathVariable String id){
         boolean destinationToBeDeleted = destinationService.deleteDestinationById(id);
         if (!destinationToBeDeleted){
-            return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination not found",HttpStatus.OK,null, TimestampUtil.now());
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination not found",HttpStatus.NOT_FOUND,null, TimestampUtil.now());
         }
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination deleted successfully",HttpStatus.OK,"",TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Destination deleted successfully",HttpStatus.NO_CONTENT,"",TimestampUtil.now());
     }
 
 }
