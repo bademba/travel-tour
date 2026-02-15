@@ -1,7 +1,9 @@
 package com.kendirita.travel_tour.controller;
 
 import com.kendirita.travel_tour.dto.QuotationItemsRequest;
+import com.kendirita.travel_tour.dto.QuotationOptionResponse;
 import com.kendirita.travel_tour.entity.QuotationItems;
+import com.kendirita.travel_tour.entity.QuotationOptions;
 import com.kendirita.travel_tour.repository.QuotationItemsRepository;
 import com.kendirita.travel_tour.response.ResponseHandler;
 import com.kendirita.travel_tour.service.QuotationItemsService;
@@ -34,6 +36,12 @@ public class QuotationItemsController {
     public ResponseEntity<Object> listAllQuoteItems(){
         List<QuotationItems> quoteItemsList = quotationItemsService.listQuoteItems();
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote Items found",HttpStatus.OK,quoteItemsList,TimestampUtil.now());
+    }
+
+    @GetMapping("/quote-item/{id}")
+    public ResponseEntity<Object> searchByQuoteItemId(@PathVariable String id) {
+        QuotationItems quotationItems = quotationItemsService.searchById(id);
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "Quote Item found", HttpStatus.OK, quotationItems, TimestampUtil.now());
     }
 
 }
