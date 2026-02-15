@@ -77,7 +77,7 @@ public class ClientController {
             return ResponseHandler.generateResponse(UUID.randomUUID(), "Client not found", HttpStatus.NOT_FOUND, null, TimestampUtil.now());
         }
 
-        return ResponseHandler.generateResponse(UUID.randomUUID(), "Client deleted successfully", HttpStatus.OK, null, TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "Client deleted successfully", HttpStatus.NO_CONTENT, null, TimestampUtil.now());
     }
 
 }

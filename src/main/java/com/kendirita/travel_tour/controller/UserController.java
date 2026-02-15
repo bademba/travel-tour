@@ -78,6 +78,6 @@ public class UserController {
             return ResponseHandler.generateResponse(UUID.randomUUID(), "User not found", HttpStatus.NOT_FOUND, null, TimestampUtil.now());
         }
 
-        return ResponseHandler.generateResponse(UUID.randomUUID(), "User deleted successfully", HttpStatus.OK, null, TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(), "User deleted successfully", HttpStatus.NO_CONTENT, null, TimestampUtil.now());
     }
 }

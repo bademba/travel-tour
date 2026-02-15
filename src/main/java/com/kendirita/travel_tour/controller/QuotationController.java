@@ -143,6 +143,6 @@ public class QuotationController {
         if (!quoteToBeDeleted){
             return ResponseHandler.generateResponse(UUID.randomUUID(),"Quotation not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
         }
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote deleted",HttpStatus.OK,"",TimestampUtil.now());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote deleted",HttpStatus.NO_CONTENT,"",TimestampUtil.now());
     }
 }
