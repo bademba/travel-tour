@@ -104,4 +104,16 @@ public class QuotationItemsController {
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote Item updated successfully",HttpStatus.OK,quotationItems,TimestampUtil.now());
 
     }
+
+
+    @DeleteMapping("/quote-item/{id}")
+    public ResponseEntity<Object> deleteQuoteItem(@PathVariable String id){
+        boolean quoteItemToBeDeleted =quotationItemsService.deletById(id);
+        if (!quoteItemToBeDeleted){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote item not found",HttpStatus.NOT_FOUND,null,TimestampUtil.now());
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Quote item deleted successfully",HttpStatus.NO_CONTENT,"",TimestampUtil.now());
+
+    }
+
 }

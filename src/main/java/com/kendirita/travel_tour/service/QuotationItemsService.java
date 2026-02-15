@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuotationItemsService {
@@ -66,5 +67,15 @@ public class QuotationItemsService {
 
     public QuotationItems searchById(String id){
         return quotationItemsRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Quote Item not found with ID " +id));
+    }
+
+
+    public boolean deletById(String id){
+        Optional<QuotationItems> quotationItems = Optional.ofNullable(quotationItemsRepository.searchById(id));
+        if (quotationItems.isEmpty()) {
+            return false;
+        }
+        quotationItemsRepository.delete(quotationItems.get());
+        return true;
     }
 }
