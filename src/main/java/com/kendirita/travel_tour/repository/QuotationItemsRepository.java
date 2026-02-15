@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QuotationItemsRepository extends JpaRepository<QuotationItems,String> {
+    QuotationItems searchById(String id);
 
 }
