@@ -7,6 +7,8 @@ import com.kendirita.travel_tour.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuotationItemsService {
     @Autowired
@@ -55,5 +57,9 @@ public class QuotationItemsService {
         quotationItems.setNotes(quotationItemsRequest.getNotes());
 
         return quotationItemsRepository.save(quotationItems);
+    }
+
+    public List<QuotationItems> listQuoteItems(){
+        return quotationItemsRepository.findAll();
     }
 }
