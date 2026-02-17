@@ -39,6 +39,9 @@ public class VoucherService {
         vouchers.setPaxChildren(voucherDTO.getPaxChildren());
         vouchers.setDetails(voucherDTO.getDetails());
         vouchers.setDetails(voucherDTO.getDetails());
+        vouchers.setStatus(voucherDTO.getStatus());
+        vouchers.setCreatedAt(voucherDTO.getCreatedAt());
+        vouchers.setUpdatedAt(voucherDTO.getUpdatedAt());
 
         return voucherRepository.save(vouchers);
 
