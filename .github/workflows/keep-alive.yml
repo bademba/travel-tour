@@ -13,3 +13,9 @@ jobs:
       - name: Ping Render App
         run: |
           curl -s https://travel-tour-l0x2.onrender.com/actuator/health
+
+      - name: Ping Render App
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://travel-tour-l0x2.onrender.com/actuator/health)
+          echo "HTTP Status: $response"
+
